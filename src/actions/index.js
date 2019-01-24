@@ -17,6 +17,18 @@ const addToCartUnsafe = productId => ({
   productId
 })
 
+/* adding remove from cart action */
+const removeFromCartUnsafe = (productId, quantity) => ({
+  type: types.REMOVE_FROM_CART,
+  productId,
+  quantity,
+})
+
+/* remove from cart dispatch to middleware */
+export const removeFromCart = (productId, quantity) => (dispatch, getState) => {
+    dispatch(removeFromCartUnsafe(productId, quantity))
+}
+
 export const addToCart = productId => (dispatch, getState) => {
   if (getState().products.byId[productId].inventory > 0) {
     dispatch(addToCartUnsafe(productId))
