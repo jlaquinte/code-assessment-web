@@ -1,20 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 
-const CartItem = ({children, onRemoveFromCartClicked}) =>{
+
+const CartItem = ({productId, children, onRemoveFromCartClicked, onIncreaseCartItems, onDecreaseCartItems}) =>{
 	return(
 		<div className="cart-item">
 		{children}
 		<button className="remove-item-btn" onClick={onRemoveFromCartClicked}>Remove</button>
+		<button className="decrease-amount-btn" onClick={()=>{
+			onDecreaseCartItems(productId)
+		}}>
+		-</button>
+		<button className="increase-amount-btn" onClick={()=>{onIncreaseCartItems(productId)}}>+</button>
 		</div>
 	)
 }
 
-CartItem.propTypes = {
-  products: PropTypes.array,
-  total: PropTypes.string,
-  onCheckoutClicked: PropTypes.func
-}
 
 export default CartItem

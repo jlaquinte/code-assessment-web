@@ -24,6 +24,39 @@ const removeFromCartUnsafe = (productId, quantity) => ({
   quantity,
 })
 
+/* action to decrease the number of items in the cart */
+const decreaseCartItemsUnsafe = (productId) =>({
+  type: types.DECREASE_CART_ITEMS,
+  productId
+})
+
+
+/* action to increase the number of items in the cart */
+const increaseCartItemsUnsafe = (productId) =>({
+  type: types.INCREASE_CART_ITEMS,
+  productId
+})
+
+/* increase cart item dispatch to middleware */
+export const increaseCartItems = (productId) => (dispatch, getState) => {
+  if (getState().products.byId[productId].inventory > 0) {
+      console.log("INVENTORY - "+getState().products.byId[productId].inventory)
+      dispatch(increaseCartItemsUnsafe(productId))    
+  }
+  else{
+    console.log("*** ELSE STATEMENT ***")
+  }
+}
+
+/* decrease cart item dispatch to middleware */
+export const decreaseCartItems = (productId, quantity) => (dispatch, getState) => {
+    console.log("INVENTORY - "+getState().products.byId[productId].inventory)
+    //if(getState().products.byId[productId].inventory > 2){
+    dispatch(decreaseCartItemsUnsafe(productId))
+  //}
+}
+
+
 /* remove from cart dispatch to middleware */
 export const removeFromCart = (productId, quantity) => (dispatch, getState) => {
     dispatch(removeFromCartUnsafe(productId, quantity))

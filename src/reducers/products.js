@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { RECEIVE_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART } from '../constants/ActionTypes'
+import { RECEIVE_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, INCREASE_CART_ITEMS, DECREASE_CART_ITEMS } from '../constants/ActionTypes'
 
 const products = (state, action) => {
   switch (action.type) {
@@ -10,6 +10,8 @@ const products = (state, action) => {
       }
     /* Adding removed cart items back to products total  */
     case REMOVE_FROM_CART:
+      console.log("**** action.quantity *****")
+      console.log(action.quantity)
       return {
         ...state,
         inventory: state.inventory + (action.quantity || 1)
@@ -20,6 +22,8 @@ const products = (state, action) => {
 }
 
 const byId = (state = {}, action) => {
+  
+  
   switch (action.type) {
     case RECEIVE_PRODUCTS:
       return {
@@ -29,6 +33,16 @@ const byId = (state = {}, action) => {
           return obj
         }, {})
       }
+    case DECREASE_CART_ITEMS:
+      console.log("**** DECREASE_CART_ITEMS Reducer *****")  
+      var { inventory, ...remaining } = state[action.productId]    
+      return {...state, [action.productId]:{ ...remaining, inventory: inventory + 1}
+    }
+    case INCREASE_CART_ITEMS:
+      console.log("**** INCREASE_CART_ITEMS Reducer *****")
+      var { inventory, ...remaining } = state[action.productId]
+      return {...state, [action.productId]:{ ...remaining, inventory: inventory - 1}
+    }
     default:
       const { productId } = action
       if (productId) {
