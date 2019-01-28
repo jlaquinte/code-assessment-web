@@ -1,5 +1,7 @@
 import {
   ADD_TO_CART,
+  OPEN_CART,
+  CLOSE_CART,
   REMOVE_FROM_CART,
   CHECKOUT_REQUEST,
   CHECKOUT_FAILURE,
@@ -9,7 +11,8 @@ import {
 
 const initialState = {
   addedIds: [],
-  quantityById: {}
+  quantityById: {},
+  cartOpenClose: {cartOpen: false}
 }
 
 /* Added condition to remove item from cart*/
@@ -24,12 +27,26 @@ const addedIds = (state = initialState.addedIds, action) => {
       if (state.indexOf(action.productId) > -1) {
         return state.filter( stateId => stateId !== action.productId )
       }
-      return state      
+      return state    
     default:
       return state
   }
 }
 
+
+const cartOpenClose = (state = initialState.cartOpenClose, action) =>{
+  console.log('****** STATE *******')
+  console.log(state)
+  switch (action.type){
+  case OPEN_CART:
+      return{cartOpen: action.status}
+    case CLOSE_CART:
+      console.log('***** THIS IS CLOSE CART!!! ******')
+      return{cartOpen: action.status} 
+    default:
+      return state
+  }
+}
 
 const quantityById = (state = initialState.quantityById, action) => {
   const { productId } = action
@@ -76,7 +93,8 @@ const cart = (state = initialState, action) => {
     default:
       return {
         addedIds: addedIds(state.addedIds, action),
-        quantityById: quantityById(state.quantityById, action)
+        quantityById: quantityById(state.quantityById, action),
+        cartOpenClose: cartOpenClose(state.cartOpenClose, action)
       }
   }
 }

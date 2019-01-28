@@ -12,10 +12,24 @@ export const getAllProducts = () => dispatch => {
   })
 }
 
+
+const closeCartUnsafe = (status) => ({
+  type: types.CLOSE_CART,
+  status:status
+})
+
+
+const openCartUnsafe = (status) => ({
+  type: types.OPEN_CART,
+  status:status
+})
+
+
 const addToCartUnsafe = productId => ({
   type: types.ADD_TO_CART,
   productId
 })
+
 
 /* adding remove from cart action */
 const removeFromCartUnsafe = (productId, quantity) => ({
@@ -66,6 +80,14 @@ export const addToCart = productId => (dispatch, getState) => {
   if (getState().products.byId[productId].inventory > 0) {
     dispatch(addToCartUnsafe(productId))
   }
+}
+
+export const openCart = status => (dispatch, getState) => {
+    dispatch(openCartUnsafe(status))
+}
+
+export const closeCart = status => (dispatch, getState) => {
+    dispatch(closeCartUnsafe(status))
 }
 
 export const checkout = products => (dispatch, getState) => {
