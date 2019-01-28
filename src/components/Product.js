@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const Product = ({ price, inventory, title, children }) => {
 
 	const imgPath = require(`../assets/images/${title.toLowerCase()}.png`)
-
+	/* Render for the products in the product section */
 	return(
 		<div className="product-detail">
 			<img className="product-img" src={imgPath} alt={title}/>

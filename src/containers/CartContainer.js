@@ -11,7 +11,6 @@ class CartContainer extends Component{
     super(props)
   }
 
-
   render(){
     return(
       <Cart

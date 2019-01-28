@@ -9,10 +9,16 @@ import CartIconLg from '../assets/icons/cart_icon_lg.svg'
 import closeBtn from '../assets/icons/close_icon.svg'
 
 const Cart  = ({ products, cartOpenClose, quantityById, total, onCheckoutClicked, closeCart, removeFromCart, increaseCartItems, decreaseCartItems }) => {
+  
+  /* Conditional rendering on this functional component */
   const hasProducts = products.length > 0
   const cartItemsContents = hasProducts ? renderProductList(products, quantityById, removeFromCart, increaseCartItems, decreaseCartItems) : renderEmptyCart()
   const checkoutSectionContents = hasProducts ? checkoutSection(total, hasProducts, onCheckoutClicked) : ""
   let hideClass = '' 
+
+  /* Adding functionality to hide and show the cart page 
+  when clicking the X button. The logic here can definitely 
+  be cleaned up a bit */
 
   if(cartOpenClose) 
     hideClass = cartOpenClose.cartOpen ? '' : 'hide'
@@ -29,7 +35,7 @@ const Cart  = ({ products, cartOpenClose, quantityById, total, onCheckoutClicked
   )
 }
 
-
+/* Render function for the checkout section of the cart */
 const checkoutSection = (total, hasProducts, onCheckoutClicked) =>{
   return(
     <div className="checkout-section">
@@ -46,7 +52,7 @@ const checkoutSection = (total, hasProducts, onCheckoutClicked) =>{
   )
 }
 
-
+/* Shoe the empty cart is no items are present */
 const renderEmptyCart = () =>{
   return (
     <div className="empty-cart-msg">

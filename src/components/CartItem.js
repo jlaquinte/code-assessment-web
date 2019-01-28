@@ -1,12 +1,13 @@
 import React from 'react'
 
 
-
 const CartItem = ({productId, inventory, maxInventory, children, quantityById, onRemoveFromCartClicked, onIncreaseCartItems, onDecreaseCartItems}) =>{
 
+	/* Conditional logic to diable buttons */
 	const isIncreaseBtnDisabled = quantityById >= maxInventory ? true : false;
 	const isDecreaseBtnDisabled = quantityById === 1 ? true : false;
 
+	/* Render for the items in the cart */
 	return(
 		<div className="cart-item">
 			{children}

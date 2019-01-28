@@ -13,25 +13,27 @@ export const getAllProducts = () => dispatch => {
 }
 
 
+/* hide the cart */
 const closeCartUnsafe = (status) => ({
   type: types.CLOSE_CART,
   status:status
 })
 
-
+/* show the cart */
 const openCartUnsafe = (status) => ({
   type: types.OPEN_CART,
   status:status
 })
 
 
+/* add to cart action */
 const addToCartUnsafe = productId => ({
   type: types.ADD_TO_CART,
   productId
 })
 
 
-/* adding remove from cart action */
+/* remove from cart action */
 const removeFromCartUnsafe = (productId, quantity) => ({
   type: types.REMOVE_FROM_CART,
   productId,

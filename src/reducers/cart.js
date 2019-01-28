@@ -25,6 +25,7 @@ const addedIds = (state = initialState.addedIds, action) => {
       return [ ...state, action.productId ]
     case REMOVE_FROM_CART:
       if (state.indexOf(action.productId) > -1) {
+        //filter out the item removed from cart and return a new object of items
         return state.filter( stateId => stateId !== action.productId )
       }
       return state    
@@ -34,25 +35,25 @@ const addedIds = (state = initialState.addedIds, action) => {
 }
 
 
+// Reducer for open/close events for opening the cart modal
 const cartOpenClose = (state = initialState.cartOpenClose, action) =>{
-  console.log('****** STATE *******')
-  console.log(state)
   switch (action.type){
   case OPEN_CART:
-      return{cartOpen: action.status}
+      return{ cartOpen: action.status }
     case CLOSE_CART:
-      console.log('***** THIS IS CLOSE CART!!! ******')
-      return{cartOpen: action.status} 
+      return{ cartOpen: action.status } 
     default:
       return state
   }
 }
 
+/* Added states for removing items from the cart and also increasing/decreasing
+items in the cart as well */
+
 const quantityById = (state = initialState.quantityById, action) => {
   const { productId } = action
   switch (action.type) {
     case ADD_TO_CART:
-      console.log("******(state[productId] || 0) + 1*****")
       return { ...state,
         [productId]: (state[productId] || 0) + 1
       }

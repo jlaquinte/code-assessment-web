@@ -22,8 +22,6 @@ const App = ({openCart, closeCart}) => {
 }
 
 const mapStateToProps = state => {
-  console.log('*** FROM APP ***')
-  console.log(state)
   return {state}
 }
 

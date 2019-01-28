@@ -11,8 +11,6 @@ const products = (state, action) => {
       }
     /* Adding removed cart items back to products total  */
     case REMOVE_FROM_CART:
-      console.log("**** action.quantity *****")
-      console.log(action.quantity)
       return {
         ...state,
         inventory: state.inventory + (action.quantity || 1)
@@ -22,15 +20,21 @@ const products = (state, action) => {
   }
 }
 
+/*
+Reducers to make sure inventory and amount are updated 
+throughout the app when user increases/decreases the 
+amount of items
+*/
+
 const byId = (state = {}, action) => {
-  
   
   switch (action.type) {
     case RECEIVE_PRODUCTS:
       return {
         ...state,
         ...action.products.reduce((obj, product) => {
-          product['maxInventory'] = product.inventory // save reference to max amount that inventory can be
+          // save reference to max amount that inventory can be since we'll need to later to keep track of
+          product['maxInventory'] = product.inventory 
           obj[product.id] = product
           return obj
         }, {})
