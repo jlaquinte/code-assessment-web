@@ -19,13 +19,10 @@ button{
 
 /* --- Body Styles --- */
 
-
-
 body {
 	background-color: #f4f5f7;
 	margin: 10px;
 	font-family: Arial, san-serif;
-
 }
 
 
@@ -35,7 +32,6 @@ body {
 	max-width: 1120px;
 	margin: 0 auto;
 }
-
 
 .store-header{
 	display: flex;
@@ -135,11 +131,10 @@ body {
 }
 
 
-
 /* --- Cart Section --- */
 
 .cart-section{
-	position:absolute;
+	position:fixed;
 	top: 50%;
 	left: 50%;
   	transform: translate(-50%,-50%);
@@ -286,8 +281,6 @@ body {
 	}
 }
 
-
-
 .checkout-btn{
 	background-color: #5E97D1;
 	color: #FFFFFF;
@@ -420,7 +413,7 @@ body {
 	/* --- Cart Section Mobile --- */
 
 	.cart-section{
-		position: absolute;
+		position: fixed;
 		padding: 20px 20px;
 		width: 100vw;
 		height: 100vh;
