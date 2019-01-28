@@ -188,8 +188,8 @@ body {
 		}
 		.product-price{
 			position: relative;
-			right: auto;
-			top: auto;
+			right: auto !important;
+			top: auto !important;
 			text-align: left;
 			font-size: 18px;
 			font-weight: 500;
