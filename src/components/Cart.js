@@ -6,10 +6,11 @@ import PropTypes from 'prop-types'
 import Product from './Product'
 import CartItem from './CartItem'
 import CartIconLg from '../assets/icons/cart_icon_lg.svg'
+import closeBtn from '../assets/icons/close_icon.svg'
 
 const Cart  = ({ products, quantityById, total, onCheckoutClicked, removeFromCart, increaseCartItems, decreaseCartItems }) => {
   const hasProducts = products.length > 0
-  const cartItemsContents = hasProducts ? getProductList(products, quantityById, removeFromCart, increaseCartItems, decreaseCartItems) : showEmptyCart()
+  const cartItemsContents = hasProducts ? renderProductList(products, quantityById, removeFromCart, increaseCartItems, decreaseCartItems) : renderEmptyCart()
   const checkoutSectionContents = hasProducts ? checkoutSection(total, hasProducts, onCheckoutClicked) : ""
 
   return (
@@ -19,9 +20,11 @@ const Cart  = ({ products, quantityById, total, onCheckoutClicked, removeFromCar
         {cartItemsContents}
       </div>
       {checkoutSectionContents}
+      <img src={closeBtn} className="cart-close-btn" alt="shopping cart close button" onClick={()=>{}} />
     </section>
   )
 }
+
 
 const checkoutSection = (total, hasProducts, onCheckoutClicked) =>{
   return(
@@ -39,7 +42,8 @@ const checkoutSection = (total, hasProducts, onCheckoutClicked) =>{
   )
 }
 
-const showEmptyCart = () =>{
+
+const renderEmptyCart = () =>{
   return (
     <div className="empty-cart-msg">
       <img src={CartIconLg} alt="large cart icon" className="cart-icon-lg"/> 
@@ -52,7 +56,7 @@ const showEmptyCart = () =>{
 /***
 Return the list of products currently added to cart 
 ***/
-const getProductList = (products, quantityById, removeFromCart, increaseCartItems, decreaseCartItems) =>{
+const renderProductList = (products, quantityById, removeFromCart, increaseCartItems, decreaseCartItems) =>{
   return products.map(product =>
     <CartItem 
     key={product.id}
