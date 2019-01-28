@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { removeFromCart, increaseCartItems, decreaseCartItems } from '../actions'
+import { removeFromCart, increaseCartItems, decreaseCartItems, closeCart } from '../actions'
 import { getCartProducts } from '../reducers'
 import PropTypes from 'prop-types'
 import Product from './Product'
@@ -8,19 +8,23 @@ import CartItem from './CartItem'
 import CartIconLg from '../assets/icons/cart_icon_lg.svg'
 import closeBtn from '../assets/icons/close_icon.svg'
 
-const Cart  = ({ products, quantityById, total, onCheckoutClicked, removeFromCart, increaseCartItems, decreaseCartItems }) => {
+const Cart  = ({ products, cartOpenClose, quantityById, total, onCheckoutClicked, closeCart, removeFromCart, increaseCartItems, decreaseCartItems }) => {
   const hasProducts = products.length > 0
   const cartItemsContents = hasProducts ? renderProductList(products, quantityById, removeFromCart, increaseCartItems, decreaseCartItems) : renderEmptyCart()
   const checkoutSectionContents = hasProducts ? checkoutSection(total, hasProducts, onCheckoutClicked) : ""
+  let hideClass = '' 
 
-  return (
-    <section className="cart-section">
+  if(cartOpenClose) 
+    hideClass = cartOpenClose.cartOpen ? '' : 'hide'
+
+  return(
+    <section className={'cart-section '+hideClass}>
       <h3 className="cart-container-title">Your Cart</h3>
       <div className="cart-items">
         {cartItemsContents}
       </div>
       {checkoutSectionContents}
-      <img src={closeBtn} className="cart-close-btn" alt="shopping cart close button" onClick={()=>{}} />
+      <img src={closeBtn} className="cart-close-btn" alt="shopping cart close button" onClick={()=>(closeCart(false))} />
     </section>
   )
 }
@@ -83,9 +87,7 @@ Cart.propTypes = {
 }
 
 const mapStateToProps = state => {
-  console.log('*** FROM CART ***')
-  console.log(state)
-  return {products: getCartProducts(state), quantityById: state.cart.quantityById}
+  return {products: getCartProducts(state), quantityById: state.cart.quantityById, cartOpenClose: state.cart.cartOpenClose}
 }
 
-export default connect(mapStateToProps, {removeFromCart, increaseCartItems, decreaseCartItems})(Cart)
+export default connect(mapStateToProps, {removeFromCart, increaseCartItems, decreaseCartItems, closeCart})(Cart)

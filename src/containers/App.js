@@ -1,20 +1,30 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { openCart, closeCart } from '../actions'
 import ProductsContainer from './ProductsContainer'
 import CartContainer from './CartContainer'
 import '../styles/styles.scss'
-import cartIcon from '../assets/icons/cart_icon.svg'
 
-const App = () => (
-  <div className="store-container">
-  	<header className="store-header">
-  		<h2 className="store-title">ACME Store</h2>
-  		<div className="cart-status">
-  			<p>Your Cart Is Empty</p>
-  		</div>
-  	</header>
-    <ProductsContainer />
-    <CartContainer />
-  </div>
-)
+const App = ({openCart, closeCart}) => {
 
-export default App
+	return(
+	  <div className="store-container">
+	  	<header className="store-header">
+	  		<h2 className="store-title">ACME Store</h2>
+	  		<div className="cart-status" onClick={()=>{openCart(true)}}>
+	  			<p>Your Cart Is Empty</p>
+	  		</div>
+	  	</header>
+	    <ProductsContainer />
+	    <CartContainer />
+	  </div>
+	)
+}
+
+const mapStateToProps = state => {
+  console.log('*** FROM APP ***')
+  console.log(state)
+  return {state}
+}
+
+export default connect(mapStateToProps, {openCart, closeCart})(App)
