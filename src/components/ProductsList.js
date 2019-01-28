@@ -2,10 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const ProductsList = ({ title, children }) => (
-  <div>
-    <h3>{title}</h3>
+  <section className="products-section">
     <div>{children}</div>
-  </div>
+  </section>
 )
 
 ProductsList.propTypes = {

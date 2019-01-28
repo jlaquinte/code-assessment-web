@@ -5,19 +5,45 @@ import { getCartProducts } from '../reducers'
 import PropTypes from 'prop-types'
 import Product from './Product'
 import CartItem from './CartItem'
+import CartIconLg from '../assets/icons/cart_icon_lg.svg'
 
 const Cart  = ({ products, quantityById, total, onCheckoutClicked, removeFromCart, increaseCartItems, decreaseCartItems }) => {
   const hasProducts = products.length > 0
-  const nodes = hasProducts ? getProductList(products, quantityById, removeFromCart, increaseCartItems, decreaseCartItems) : (<em>Please add some products to cart.</em>)
+  const cartItemsContents = hasProducts ? getProductList(products, quantityById, removeFromCart, increaseCartItems, decreaseCartItems) : showEmptyCart()
+  const checkoutSectionContents = hasProducts ? checkoutSection(total, hasProducts, onCheckoutClicked) : ""
+
   return (
-    <div>
-      <h3>Your Cart</h3>
-      <div>{nodes}</div>
-      <p>Total: &#36;{total}</p>
-      <button onClick={onCheckoutClicked}
+    <section className="cart-section">
+      <h3 className="cart-container-title">Your Cart</h3>
+      <div className="cart-items">
+        {cartItemsContents}
+      </div>
+      {checkoutSectionContents}
+    </section>
+  )
+}
+
+const checkoutSection = (total, hasProducts, onCheckoutClicked) =>{
+  return(
+    <div className="checkout-section">
+      <div className="total-cost">
+        <p className="total-title">Total:</p> <p>&#36;{total}</p>
+      </div>
+      <button 
+        className="checkout-btn"
+        onClick={onCheckoutClicked}
         disabled={hasProducts ? '' : 'disabled'}>
         Checkout
       </button>
+    </div>
+  )
+}
+
+const showEmptyCart = () =>{
+  return (
+    <div className="empty-cart-msg">
+      <img src={CartIconLg} className="cart-icon-lg"/> 
+      <p className="please-add-msg">Please add some products to your cart.</p>
     </div>
   )
 }
@@ -33,13 +59,13 @@ const getProductList = (products, quantityById, removeFromCart, increaseCartItem
     productId={product.id}
     onIncreaseCartItems={increaseCartItems}
     onDecreaseCartItems={decreaseCartItems}
-    quantityById={quantityById[product.id]}
-    onRemoveFromCartClicked={() => removeFromCart(product.id, quantityById[product.id])}>
+    quantityById={quantityById[product.id]}>
       <Product
         title={product.productTitle}
         price={product.price.value}
-        quantity={product.quantity}
-      />
+        quantity={product.quantity}>
+        <button className="remove-item-btn" onClick={() => removeFromCart(product.id, quantityById[product.id])}>Remove</button>
+      </Product>
     </CartItem>
   )
 }
