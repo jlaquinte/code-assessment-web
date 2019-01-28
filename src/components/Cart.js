@@ -42,7 +42,7 @@ const checkoutSection = (total, hasProducts, onCheckoutClicked) =>{
 const showEmptyCart = () =>{
   return (
     <div className="empty-cart-msg">
-      <img src={CartIconLg} className="cart-icon-lg"/> 
+      <img src={CartIconLg} alt="large cart icon" className="cart-icon-lg"/> 
       <p className="please-add-msg">Please add some products to your cart.</p>
     </div>
   )
@@ -59,7 +59,9 @@ const getProductList = (products, quantityById, removeFromCart, increaseCartItem
     productId={product.id}
     onIncreaseCartItems={increaseCartItems}
     onDecreaseCartItems={decreaseCartItems}
-    quantityById={quantityById[product.id]}>
+    quantityById={quantityById[product.id]}
+    inventory={product.inventory}
+    maxInventory={product.maxInventory}>
       <Product
         title={product.productTitle}
         price={product.price.value}
@@ -75,7 +77,6 @@ Cart.propTypes = {
   total: PropTypes.string,
   onCheckoutClicked: PropTypes.func
 }
-
 
 const mapStateToProps = state => {
   console.log('*** FROM CART ***')

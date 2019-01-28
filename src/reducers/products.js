@@ -29,6 +29,7 @@ const byId = (state = {}, action) => {
       return {
         ...state,
         ...action.products.reduce((obj, product) => {
+          product['maxInventory'] = product.inventory // save reference to max amount that inventory can be
           obj[product.id] = product
           return obj
         }, {})
