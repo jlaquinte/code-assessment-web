@@ -35,11 +35,16 @@ const quantityById = (state = initialState.quantityById, action) => {
   const { productId } = action
   switch (action.type) {
     case ADD_TO_CART:
+      console.log("******(state[productId] || 0) + 1*****")
       return { ...state,
         [productId]: (state[productId] || 0) + 1
       }
     case REMOVE_FROM_CART:
-      return { [productId]: 0 }
+      console.log("***** REMOVE_FROM_CART *****")
+      return {
+        ...state,
+        [productId]:0
+      }
     case INCREASE_CART_ITEMS:
       console.log("INCREASE_CART_ITEMS")
       return {
