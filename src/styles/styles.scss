@@ -125,16 +125,32 @@ button{
 /* --- Cart Section --- */
 
 .cart-section{
-	position:absolute;
+	position: relative;
+	/*position:absolute;
 	top: 50%;
 	left: 50%;
-  	transform: translate(-50%,-50%);
+  	transform: translate(-50%,-50%);*/
+
 	padding: 50px 80px;
 	background-color: #FFFFFF;
 	border: 1px solid #E1E1E1;
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
 	border-radius: 14px;
+
+	&.hide{
+		display: none;
+	}
 }
+
+.cart-close-btn{
+	position: absolute;
+	right: 25px;
+	top: 25px;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+
 .cart-container-title{
 	font-size: 28px;
 	color: #000000;
