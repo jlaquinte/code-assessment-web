@@ -32,4 +32,6 @@ Since I didn't want to waste time I put all the css into one file. If I were to 
 
 The mobile css on the cart page needs some work. I was running out of time and didn't have enough time to tweak it as much as needed. Cart.js could be cleaned up considerably and I would have liked to taken a shot at rebuilding the whole CartContainer, Cart, and CartItem file structure.
 
-I also noticed that the file data model of the dummy data was different than the API model. I'd probably like to take a look at the API model to access if that structure is best for this project.
+With more time it would be best to have both desktop and mobile optimized images that the system would interchange.
+
+I also noticed that the data model of the dummy data was different than the API model. I'd probably like to take a look at the API model to access if that structure is best for this project.
