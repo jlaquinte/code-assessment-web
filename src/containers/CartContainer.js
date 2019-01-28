@@ -5,21 +5,13 @@ import { checkout } from '../actions'
 import { getTotal, getCartProducts } from '../reducers'
 import Cart from '../components/Cart'
 
-class CartContainer extends Component{
-  
-  constructor(props){
-    super(props)
-  }
+const CartContainer = ({ products, total, checkout }) => (
+  <Cart
+    products={products}
+    total={total}
+    onCheckoutClicked={() => checkout(products)} />
+)
 
-  render(){
-    return(
-      <Cart
-      products={this.props.products}
-      total={this.props.total}
-      onCheckoutClicked={() => checkout(this.props.products)} />
-    )
-  }
-}
 
 CartContainer.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
