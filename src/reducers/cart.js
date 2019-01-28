@@ -57,18 +57,21 @@ const quantityById = (state = initialState.quantityById, action) => {
       return { ...state,
         [productId]: (state[productId] || 0) + 1
       }
+    // Remove item of productId from cart entirely
     case REMOVE_FROM_CART:
       console.log("***** REMOVE_FROM_CART *****")
       return {
         ...state,
         [productId]:0
       }
+    // Add 1 to the value of a cart item of productId
     case INCREASE_CART_ITEMS:
       console.log("INCREASE_CART_ITEMS")
       return {
         ...state,
         [productId]: (state[productId]) + 1
       }
+    // Subtract 1 to the value of a cart item of productId
     case DECREASE_CART_ITEMS:
       console.log("DECREASE_CART_ITEMS")
       return {

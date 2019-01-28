@@ -39,11 +39,15 @@ const byId = (state = {}, action) => {
           return obj
         }, {})
       }
+    // increment total of products in product section remaining when cart is decreased
+    // return the whole object with the updated inventory amount
     case DECREASE_CART_ITEMS:
       console.log("**** DECREASE_CART_ITEMS Reducer *****")  
       var { inventory, ...remaining } = state[action.productId]    
       return {...state, [action.productId]:{ ...remaining, inventory: inventory + 1}
     }
+    // decrement total of products in product section remaining when cart is increased
+    // return the whole object with the updated inventory amount
     case INCREASE_CART_ITEMS:
       console.log("**** INCREASE_CART_ITEMS Reducer *****")
       var { inventory, ...remaining } = state[action.productId]
