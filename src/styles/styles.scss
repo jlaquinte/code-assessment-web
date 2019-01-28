@@ -14,7 +14,6 @@ button{
 	outline: none;
 }
 
-
 /* --- Product Section --- */
 
 .store-container{
@@ -257,21 +256,21 @@ button{
 		background-color: #5E97D1;
 		color: #FFFFFF;
 	}
+	&:disabled {
+  		background-color: #F9F9F9;
+  		color: #D8D8D8;
+	}
+
+	&.decrease-amount-btn {
+		border-radius: 40px 0 0 40px;
+	}
+
+	&.increase-amount-btn {
+		border-radius: 0 40px 40px 0;
+	}
 }
 
 
-.amount-btn:disabled {
-  background-color: #F9F9F9;
-  color: #D8D8D8;
-}
-
-.decrease-amount-btn {
-  border-radius: 50px 0 0 50px;
-}
-
-.increase-amount-btn {
-  border-radius: 0 50px 50px 0;
-}
 
 .checkout-btn{
 	background-color: #5E97D1;
